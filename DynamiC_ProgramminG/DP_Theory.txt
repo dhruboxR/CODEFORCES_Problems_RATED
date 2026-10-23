@@ -1,0 +1,4 @@
+
+### PROPERTIES : 
+        1. We don't calculate the values which was already calculated. 
+        2. We store the values that we calculate in the process to avoid recalculation 
