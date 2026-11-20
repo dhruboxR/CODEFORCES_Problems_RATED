@@ -23,21 +23,19 @@ void solve() {
     for(auto &v : source) cin >> v; 
 
     // we try to make the sum as high as possible and also as low as possible 
-    int value_low = source.front(), value_high = source.front();
+    int value_low = 0, value_high = 0;
 
-    int answer = LLONG_MIN; 
-    for(int i = 1; i < n; i++) {
+    int answer = source.front(); 
+    for(int i = 0; i < n; i++) {
         int cmax = max({source[i], source[i] - value_low, source[i] + value_high}); 
         answer = max(answer, cmax); 
 
-        // update the values 
-        value_low = min({value_low+source[i]+value_low,
-                        value_low+source[i]-value_low,
-                        value_low+source[i]}); 
-        
-        value_high = max({value_high+source[i]+value_high, 
-                          value_high+source[i]-value_high,
-                          value_high+source[i]});
+        // update the values       
+        int next_low = min({source[i], source[i] + value_low, source[i] + 2 * value_low});
+        int next_high = max({source[i], source[i] + value_high, source[i] + 2 * value_high});
+
+        value_low = next_low; 
+        value_high = next_high; 
     }
 
     cout << answer << endl; 
